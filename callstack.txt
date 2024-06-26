@@ -1,0 +1,39 @@
+In JavaScript, the **call stack** is a mechanism that the JavaScript engine uses to keep track of function calls within a program. It operates on a **Last In, First Out (LIFO)** principle, meaning the last function that gets called is the first to be executed and removed from the stack once its execution is complete.
+
+Here's a simplified explanation of how the call stack works:
+1. When a script starts executing, the JavaScript engine creates a **global execution context** and pushes it onto the call stack.
+2. Whenever a function is called, a new **function execution context** is created for that function and pushed onto the top of the call stack.
+3. If this function calls another function, step 2 is repeated for the new function.
+4. When a function completes its execution, its execution context is popped off the call stack.
+5. The script stops executing when the call stack is empty.
+
+For example, consider the following code:
+
+```javascript
+function add(a, b) {
+  return a + b;
+}
+
+function average(a, b) {
+  return add(a, b) / 2;
+}
+
+let x = average(10, 20);
+```
+
+When `average(10, 20)` is called, the JavaScript engine does the following:
+- Pushes the `average` function's execution context onto the call stack.
+- Inside `average`, the `add` function is called, so its execution context is pushed onto the call stack.
+- `add` function executes and returns a value, after which its execution context is popped off the call stack.
+- Control returns to the `average` function, which then completes and is also popped off the call stack.
+- Finally, the global execution context is popped off, leaving the call stack empty.
+
+It's important to note that the call stack has a **fixed size**, and if it exceeds its limit due to, for example, a recursive function without an exit condition, a **stack overflow error** will occur.
+
+Understanding the call stack is crucial for debugging, as it can help you trace the sequence of function calls that led to an error.
+
+Source: Conversation with Bing, 4/16/2024
+(1) JavaScript Call Stack - JavaScript Tutorial. https://www.javascripttutorial.net/javascript-call-stack/.
+(2) What is the Call Stack in JavaScript - GeeksforGeeks. https://www.geeksforgeeks.org/what-is-the-call-stack-in-javascript/.
+(3) What is Call Stack in JavaScript - GeeksforGeeks. https://www.geeksforgeeks.org/what-is-call-stack-in-javascript/.
+(4) JavaScript Event Loop And Call Stack Explained | Felix Gerschau. https://felixgerschau.com/javascript-event-loop-call-stack/.
